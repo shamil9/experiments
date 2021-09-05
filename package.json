@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "serve": "parcel index.html"
+    "serve": "parcel"
   },
   "dependencies": {
     "dat.gui": "^0.7.7",
