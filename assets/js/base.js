@@ -2,8 +2,6 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import * as dat from "dat.gui"
 
-import vertexShader from "../shaders/vertex.vert"
-import fragmentShader from "../shaders/fragment.frag"
 
 export default class Base {
   constructor() {
@@ -11,17 +9,7 @@ export default class Base {
     this.canvas = document.querySelector("canvas.webgl")
     this.scene = new THREE.Scene()
     this.textureLoader = new THREE.TextureLoader()
-    this.geometry = new THREE.PlaneGeometry(1, 1, 32, 32)
-    this.material = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      side: THREE.DoubleSide,
-      uniforms: {
-        uTime: { value: 0 },
-      },
-    })
-    this.mesh = new THREE.Mesh(this.geometry, this.material)
-    this.scene.add(this.mesh)
+
     this.sizes = {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -61,11 +49,11 @@ export default class Base {
       this.sizes.height = window.innerHeight
 
       // Update camera
-      this.camera.aspect = sizes.width / sizes.height
+      this.camera.aspect = this.sizes.width / this.sizes.height
       this.camera.updateProjectionMatrix()
 
       // Update renderer
-      this.renderer.setSize(sizes.width, sizes.height)
+      this.renderer.setSize(this.sizes.width, this.sizes.height)
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     })
   }
