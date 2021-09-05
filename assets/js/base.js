@@ -1,14 +1,20 @@
-import * as THREE from "three"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import * as dat from "dat.gui"
-
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'dat.gui'
 
 export default class Base {
   constructor() {
     this.gui = new dat.GUI()
-    this.canvas = document.querySelector("canvas.webgl")
+    this.canvas = document.querySelector('canvas.webgl')
     this.scene = new THREE.Scene()
-    this.textureLoader = new THREE.TextureLoader()
+    this.gltfLoader = new GLTFLoader()
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderPath(
+      'https://www.gstatic.com/draco/versioned/decoders/1.3.6/'
+    )
+    this.gltfLoader.setDRACOLoader(dracoLoader)
 
     this.sizes = {
       width: window.innerWidth,
@@ -43,7 +49,7 @@ export default class Base {
   }
 
   setListeners() {
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       // Update sizes
       this.sizes.width = window.innerWidth
       this.sizes.height = window.innerHeight
