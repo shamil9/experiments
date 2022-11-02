@@ -1,11 +1,11 @@
 import Base from './base'
 import * as THREE from "three"
 
-import logo from "../models/epic-logo.glb"
+import logo from "../models/epic-logo.glb?url"
 
 class Main extends Base {
-	constructor() {
-		super()
+  constructor() {
+    super()
     this.gltfLoader.load(logo, data => {
       this.logo = data.scene
       this.logo.traverse(obj => {
@@ -17,13 +17,13 @@ class Main extends Base {
       })
       this.scene.add(this.logo)
     })
-	}
+  }
 
-	tick() {
+  tick() {
     if (this.logo) {
       this.logo.rotation.y += Math.PI / 2 * 0.01
     }
-	}
+  }
 }
 
 const main = new Main()
