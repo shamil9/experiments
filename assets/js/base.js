@@ -5,8 +5,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 
 export default class Base {
-  constructor() {
-    this.controlsEnabled = true
+  constructor(options = { controls: true }) {
+    this.controlsEnabled = options.controls
     this.gui = new dat.GUI()
     this.canvas = document.querySelector('canvas.webgl')
     this.scene = new THREE.Scene()
@@ -45,10 +45,11 @@ export default class Base {
     this.scene.add(this.camera)
 
     // Controls
-    // if (this.controlsEnabled) {
-    //   this.controls = new OrbitControls(this.camera, this.canvas)
-    //   this.controls.enableDamping = true
-    // }
+    console.log(this.controlsEnabled)
+    if (this.controlsEnabled) {
+      this.controls = new OrbitControls(this.camera, this.canvas)
+      this.controls.enableDamping = true
+    }
   }
 
   setListeners() {
@@ -73,9 +74,9 @@ export default class Base {
     this.delta = this.clock.getDelta()
     this.elapsedTime = this.clock.getElapsedTime()
     this.tick()
-    // if (this.controlsEnabled) {
-    //   this.controls.update()
-    // }
+    if (this.controlsEnabled) {
+      this.controls.update()
+    }
     this.renderer.render(this.scene, this.camera)
     window.requestAnimationFrame(this.render.bind(this))
   }
