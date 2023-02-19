@@ -1,11 +1,4 @@
-import {
-  Mesh,
-  MeshBasicMaterial,
-  PlaneBufferGeometry,
-  RepeatWrapping,
-  Texture,
-  Vector3,
-} from 'three'
+import { Mesh, MeshBasicMaterial, PlaneBufferGeometry, Vector3 } from 'three'
 
 import Base from './base'
 import t1 from '@/assets/images/06-image-transition/01.jpg?url'

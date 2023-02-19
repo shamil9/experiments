@@ -12,13 +12,14 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 
 export default class Base {
-  constructor(
-    settings = {
+  constructor(params = {}) {
+    const settings = {
       controls: true,
       camera: { fov: 75, near: 0.1, far: 100, position: new Vector3(0) },
+      ...params,
     }
-  ) {
-    this.controlsEnabled = settings.controls
+    this.settings = settings
+    this.controlsEnabled = this.settings.controls
     this.gui = new dat.GUI()
     this.canvas = document.querySelector('canvas.webgl')
     this.scene = new Scene()
@@ -36,23 +37,24 @@ export default class Base {
     }
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
+      antialias: true,
     })
     this.renderer.setSize(this.sizes.width, this.sizes.height)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     this.clock = new Clock()
-    this.setCamera(settings.camera)
+    this.setCamera()
     this.setListeners()
     this.render()
   }
 
-  setCamera(settings) {
+  setCamera() {
     this.camera = new PerspectiveCamera(
-      settings.fov,
+      this.settings.camera.fov,
       this.sizes.width / this.sizes.height,
-      settings.near,
-      settings.far
+      this.settings.camera.near,
+      this.settings.camera.far
     )
-    this.camera.position.copy(settings.position)
+    this.camera.position.copy(this.settings.camera.position)
     this.scene.add(this.camera)
 
     // Controls

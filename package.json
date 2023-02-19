@@ -15,6 +15,7 @@
     "cannon-es": "^0.19.0",
     "dat.gui": "^0.7.9",
     "gsap": "./gsap-bonus.tgz",
-    "three": "^0.140.0"
+    "lamina": "^1.1.23",
+    "three": "^0.149.0"
   }
 }
