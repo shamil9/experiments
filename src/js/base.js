@@ -5,6 +5,7 @@ import {
   Clock,
   PerspectiveCamera,
   Vector3,
+  sRGBEncoding,
 } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
@@ -32,8 +33,8 @@ export default class Base {
     this.gltfLoader.setDRACOLoader(dracoLoader)
 
     this.sizes = {
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: this.canvas.offsetWidth,
+      height: this.canvas.offsetHeight,
     }
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
@@ -41,6 +42,7 @@ export default class Base {
     })
     this.renderer.setSize(this.sizes.width, this.sizes.height)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    this.renderer.outputEncoding = sRGBEncoding
     this.clock = new Clock()
     this.setCamera()
     this.setListeners()
@@ -64,11 +66,22 @@ export default class Base {
     }
   }
 
+  calculateUnitSize(distance = this.camera.position.z) {
+    const vFov = (this.camera.fov * Math.PI) / 180
+    const height = 2 * Math.tan(vFov / 2) * distance
+    const width = height * this.camera.aspect
+
+    return {
+      width,
+      height,
+    }
+  }
+
   setListeners() {
     window.addEventListener('resize', () => {
       // Update sizes
-      this.sizes.width = window.innerWidth
-      this.sizes.height = window.innerHeight
+      this.sizes.width = this.canvas.offsetWidth
+      this.sizes.height = this.canvas.offsetHeight
 
       // Update camera
       this.camera.aspect = this.sizes.width / this.sizes.height

@@ -5,19 +5,17 @@
 
 html,
 body {
-  background: #f5f5f5;
+  background-color: black;
 }
 
 h2 {
   margin-bottom: 20px;
   color: #232b2b;
-  font-family: 'Playfair Display', serif;
   font-size: 70px;
 }
 
 p {
   color: #353839;
-  font-family: 'Inter', sans-serif;
   line-height: 25px;
 }
 
@@ -62,6 +60,9 @@ p {
 .webgl {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  width: 100vh;
+  height: 100vh;
   outline: none;
+  transform: translateX(-50%);
 }

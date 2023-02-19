@@ -2,6 +2,9 @@
 precision highp float;
 #endif
 
+attribute vec3 position;
+attribute vec4 color;
+
 varying vec3 vUv;
 uniform float uTime;
 
