@@ -16,6 +16,6 @@
     "dat.gui": "^0.7.9",
     "gsap": "./gsap-bonus.tgz",
     "lamina": "^1.1.23",
-    "three": "^0.149.0"
+    "three": "^0.150.1"
   }
 }
