@@ -27,9 +27,7 @@ export default class Base {
     this.textureLoader = new TextureLoader()
     this.gltfLoader = new GLTFLoader()
     const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath(
-      'https://www.gstatic.com/draco/versioned/decoders/1.3.6/'
-    )
+    dracoLoader.setDecoderPath('/draco/')
     this.gltfLoader.setDRACOLoader(dracoLoader)
 
     this.sizes = {
