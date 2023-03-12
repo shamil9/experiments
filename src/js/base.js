@@ -16,7 +16,7 @@ export default class Base {
   constructor(params = {}) {
     const settings = {
       controls: true,
-      camera: { fov: 75, near: 0.1, far: 100, position: new Vector3(0) },
+      camera: { fov: 75, near: 0.1, far: 100, position: new Vector3(0, 0, 5) },
       ...params,
     }
     this.settings = settings

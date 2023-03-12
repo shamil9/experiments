@@ -61,8 +61,8 @@ p {
   position: fixed;
   top: 0;
   left: 50%;
-  width: 100vh;
-  height: 100vh;
+  width: min(100dvh, 100dvw);
+  height: min(100dvh, 100dvw);
   outline: none;
   transform: translateX(-50%);
 }
